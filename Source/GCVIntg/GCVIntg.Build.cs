@@ -23,6 +23,7 @@ public class GCVIntg : ModuleRules
                 "Core",
                 "CoreUObject",
                 "Engine",
+                "GameplayTags",
             }
         );
 

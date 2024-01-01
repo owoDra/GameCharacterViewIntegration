@@ -13,7 +13,7 @@ class UViewMode;
 /**
  * Modifier class to add viewer component to Pawn
  */
-UCLASS(meta = (DisplayName = "CM Add Playable Component"))
+UCLASS(meta = (DisplayName = "CM Add Viewer Component"))
 class UCharacterModifier_AddViewerComponent final : public UCharacterModifier
 {
 	GENERATED_BODY()
