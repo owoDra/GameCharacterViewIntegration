@@ -21,10 +21,10 @@ public:
 	UCharacterModifier_AddViewerComponent();
 
 protected:
-	UPROPERTY(EditDefaultsOnly, Category = "AddPlayableComponent")
+	UPROPERTY(EditDefaultsOnly, Category = "AddViewerComponent")
 	TSoftClassPtr<UViewerComponent> ComponentClass{ nullptr };
 
-	UPROPERTY(EditDefaultsOnly, Category = "AddPlayableComponent")
+	UPROPERTY(EditDefaultsOnly, Category = "AddViewerComponent")
 	TSoftClassPtr<UViewMode> ViewMode{ nullptr };
 
 protected:
