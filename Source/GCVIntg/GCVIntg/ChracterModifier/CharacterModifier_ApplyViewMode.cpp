@@ -14,9 +14,9 @@
 
 UCharacterModifier_ApplyViewMode::UCharacterModifier_ApplyViewMode()
 {
-	bOnlyApplyOnLocal = true;
-	bApplyOnClient = false;
-	bApplyOnServer = false;
+	bOnlyApplyOnLocal = false;
+	bApplyOnClient = true;
+	bApplyOnServer = true;
 }
 
 

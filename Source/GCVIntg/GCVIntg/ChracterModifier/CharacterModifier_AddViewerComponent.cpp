@@ -14,9 +14,9 @@
 
 UCharacterModifier_AddViewerComponent::UCharacterModifier_AddViewerComponent()
 {
-	bOnlyApplyOnLocal = true;
-	bApplyOnClient = false;
-	bApplyOnServer = false;
+	bOnlyApplyOnLocal = false;
+	bApplyOnClient = true;
+	bApplyOnServer = true;
 }
 
 
