@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include "CharacterModifier.h"
+#include "Recipe/CharacterRecipe.h"
 
-#include "CharacterModifier_ApplyViewMode.generated.h"
+#include "CharacterRecipe_ApplyViewMode.generated.h"
 
 class UViewerComponent;
 class UViewMode;
@@ -13,18 +13,18 @@ class UViewMode;
 /**
  * Modifier class to apply ViewMode to viewer component
  */
-UCLASS(meta = (DisplayName = "CM Apply View Mode"))
-class UCharacterModifier_ApplyViewMode final : public UCharacterModifier
+UCLASS()
+class UCharacterRecipe_ApplyViewMode final : public UCharacterRecipe
 {
 	GENERATED_BODY()
 public:
-	UCharacterModifier_ApplyViewMode();
+	UCharacterRecipe_ApplyViewMode();
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "ApplyViewMode")
 	TSoftClassPtr<UViewMode> ViewMode{ nullptr };
 
 protected:
-	virtual bool OnApply(APawn* Pawn) const override;
+	virtual void StartSetupNonInstanced_Implementation(FCharacterRecipePawnInfo Info) const override;
 
 };
