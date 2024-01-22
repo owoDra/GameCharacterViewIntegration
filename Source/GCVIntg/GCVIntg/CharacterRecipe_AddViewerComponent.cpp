@@ -2,12 +2,11 @@
 
 #include "CharacterRecipe_AddViewerComponent.h"
 
-#include "GCVIntgLogs.h"
-
 #include "ViewerComponent.h"
 #include "Mode/ViewMode.h"
 
 #include "CharacterInitStateComponent.h"
+#include "GCExtLogs.h"
 
 #include "GameFramework/Pawn.h"
 
@@ -18,6 +17,11 @@ UCharacterRecipe_AddViewerComponent::UCharacterRecipe_AddViewerComponent()
 {
 	InstancingPolicy = ECharacterRecipeInstancingPolicy::NonInstanced;
 	NetExecutionPolicy = ECharacterRecipeNetExecutionPolicy::ClientOnly;
+
+#if WITH_EDITOR
+	StaticClass()->FindPropertyByName(FName{ TEXTVIEW("InstancingPolicy") })->SetPropertyFlags(CPF_DisableEditOnTemplate);
+	StaticClass()->FindPropertyByName(FName{ TEXTVIEW("NetExecutionPolicy") })->SetPropertyFlags(CPF_DisableEditOnTemplate);
+#endif
 }
 
 
@@ -36,7 +40,7 @@ void UCharacterRecipe_AddViewerComponent::StartSetupNonInstanced_Implementation(
 		auto* NewVC{ NewObject<UViewerComponent>(Pawn, LoadedComponentClass) };
 		NewVC->RegisterComponent();
 
-		UE_LOG(LogGCVI, Log, TEXT("+Component (Name: %s, Class: %s)"), *GetNameSafe(NewVC), *GetNameSafe(LoadedComponentClass));
+		UE_LOG(LogGameExt_CharacterRecipe, Log, TEXT("+Component (Name: %s, Class: %s)"), *GetNameSafe(NewVC), *GetNameSafe(LoadedComponentClass));
 
 		auto* LoadedViewModeClass
 		{
@@ -44,7 +48,7 @@ void UCharacterRecipe_AddViewerComponent::StartSetupNonInstanced_Implementation(
 			ViewMode.IsValid() ? ViewMode.Get() : ViewMode.LoadSynchronous()
 		};
 
-		UE_LOG(LogGCVI, Log, TEXT("++ViewMode (Name: %s)"), *GetNameSafe(LoadedViewModeClass));
+		UE_LOG(LogGameExt_CharacterRecipe, Log, TEXT("++ViewMode (Name: %s)"), *GetNameSafe(LoadedViewModeClass));
 
 		auto ViewModeClass{ TSubclassOf<UViewMode>(LoadedViewModeClass) };
 

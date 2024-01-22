@@ -2,12 +2,11 @@
 
 #include "CharacterRecipe_ApplyViewMode.h"
 
-#include "GCVIntgLogs.h"
-
 #include "ViewerComponent.h"
 #include "Mode/ViewMode.h"
 
 #include "CharacterInitStateComponent.h"
+#include "GCExtLogs.h"
 
 #include "GameFramework/Pawn.h"
 
@@ -18,6 +17,11 @@ UCharacterRecipe_ApplyViewMode::UCharacterRecipe_ApplyViewMode()
 {
 	InstancingPolicy = ECharacterRecipeInstancingPolicy::NonInstanced;
 	NetExecutionPolicy = ECharacterRecipeNetExecutionPolicy::ClientOnly;
+
+#if WITH_EDITOR
+	StaticClass()->FindPropertyByName(FName{ TEXTVIEW("InstancingPolicy") })->SetPropertyFlags(CPF_DisableEditOnTemplate);
+	StaticClass()->FindPropertyByName(FName{ TEXTVIEW("NetExecutionPolicy") })->SetPropertyFlags(CPF_DisableEditOnTemplate);
+#endif
 }
 
 
@@ -33,7 +37,7 @@ void UCharacterRecipe_ApplyViewMode::StartSetupNonInstanced_Implementation(FChar
 			ViewMode.IsValid() ? ViewMode.Get() : ViewMode.LoadSynchronous()
 		};
 
-		UE_LOG(LogGCVI, Log, TEXT("++ViewMode (Name: %s)"), *GetNameSafe(LoadedViewModeClass));
+		UE_LOG(LogGameExt_CharacterRecipe, Log, TEXT("++ViewMode (Name: %s)"), *GetNameSafe(LoadedViewModeClass));
 
 		auto ViewModeClass{ TSubclassOf<UViewMode>(LoadedViewModeClass) };
 
